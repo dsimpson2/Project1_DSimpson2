@@ -59,14 +59,14 @@ void initializeArrays(Capacitor& cap, int timesteps, double dt) {
     cap.voltage = new double[timesteps];
     cap.current = new double[timesteps];
 
-    // Fill time array
+    // Fill time array with time values
     for (int i = 0; i < timesteps; i++) {
         cap.time[i] = i * dt;
     }
 
     // Initial conditions (assignment rules)
-    cap.voltage[0] = 0.0;   // constant current case
-    // current[0] will be set inside each simulation
+    cap.voltage[0] = 0.0;   // constant current case: V(0) = 0 V, constant voltage case: V(0) = 0 V
+    // current[0] will be set inside each simulation function based on the case (constant current or constant voltage)
 }
 
 // Constant current simulation
@@ -76,11 +76,11 @@ void simulateConstantCurrent(Capacitor& cap, int timesteps, double dt, double I)
 
     for (int t = 1; t < timesteps; t++) {
 
-        // Voltage update:
+        // Voltage update requires integrating current:
         // V(t+1) = V(t) + I(t)*dt*(1/C)
         cap.voltage[t] = cap.voltage[t-1] + I * dt * (1/cap.C); 
 
-        // Current stays constant
+        // Current stays constant for this case:
         cap.current[t] = I;
     }
 }
@@ -88,12 +88,12 @@ void simulateConstantCurrent(Capacitor& cap, int timesteps, double dt, double I)
 // Constant voltage simulation
 void simulateConstantVoltage(Capacitor& cap, int timesteps, double dt, double R, double V0) { // given by assignment
 
-    // Initial current: I(0) = V0 / R // given by assignment
-    cap.current[0] = V0 / R; // given by assignment
+    // Initial current: I(0) = V0 / R 
+    cap.current[0] = V0 / R; 
 
     for (int t = 1; t < timesteps; t++) { 
 
-        // Current update:
+        // Current update requires solving the differential equation for an RC circuit:
         // I(t+1) = I(t) - (I(t)/(R*C))*dt
         cap.current[t] = cap.current[t-1] - (cap.current[t-1] / (R * cap.C)) * dt;
 
@@ -103,7 +103,7 @@ void simulateConstantVoltage(Capacitor& cap, int timesteps, double dt, double R,
     }
 }
 
-// Print every 200 timesteps
+// Print every 200 timesteps 
 void printResults(const Capacitor& cap, int timesteps) { 
 
     for (int t = 0; t < timesteps; t += 200) { // print every 200 timesteps
