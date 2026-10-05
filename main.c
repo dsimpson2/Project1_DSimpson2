@@ -65,7 +65,7 @@ void initializeArrays(Capacitor& cap, int timesteps, double dt) {
     }
 
     // Initial conditions (assignment rules)
-    cap.voltage[0] = 0.0;   // constant current case: V(0) = 0 V, constant voltage case: V(0) = 0 V
+    cap.voltage[0] = 0.0; // constant current case: V(0) = 0 V, constant voltage case: V(0) = 0 V
     // current[0] will be set inside each simulation function based on the case (constant current or constant voltage)
 }
 
@@ -107,9 +107,9 @@ void simulateConstantVoltage(Capacitor& cap, int timesteps, double dt, double R,
 void printResults(const Capacitor& cap, int timesteps) { 
 
     for (int t = 0; t < timesteps; t += 200) { // print every 200 timesteps
-        cout << "t = " << cap.time[t] 
-             << "   V = " << cap.voltage[t]
-             << "   I = " << cap.current[t]
+        cout << "t =  " << cap.time[t] 
+             << "    V = " << cap.voltage[t]
+             << "    I = " << cap.current[t]
              << endl;
     }
 }
