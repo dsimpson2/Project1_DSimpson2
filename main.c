@@ -20,24 +20,24 @@ void printResults(const Capacitor& cap, int timesteps); // print results every 2
 
 int main() {
 
-    const double dt = 1e-10;          // timestep
-    const double finalTime = 5e-6;    // final time
-    const int timesteps = finalTime / dt;   // 50000
-    const double R = 1000.0;          // 1 kΩ
-    const double C = 100e-12;         // 100 pF
-    const double I = 1e-2;            // constant current case
-    const double V0 = 10.0;           // constant voltage case
+    const double dt = 1e-10; // timestep
+    const double finalTime = 5e-6; // final time  
+    const int timesteps = finalTime / dt; // number of timesteps
+    const double R = 1000.0; // 1 kOhm resistor for constant voltage case
+    const double C = 100e-12; // 100 pF capacitor
+    const double I = 1e-2; // constant current of 10 mA for constant current case
+    const double V0 = 10.0; // constant voltage of 10 V for constant voltage case
 
-    // Create capacitor object
+    // Create capacitor structure and set capacitance
     Capacitor cap;
     cap.C = C;
 
-    // Allocate arrays
+    // Allocate and initialize arrays
     initializeArrays(cap, timesteps, dt);
 
     // Case 1: Constant current charging
-    cout << "\n=== Constant Current Charging ===\n";
-    simulateConstantCurrent(cap, timesteps, dt, I);
+    cout << "\n=== Constant Current Charging ===\n"; 
+    simulateConstantCurrent(cap, timesteps, dt, I); 
     printResults(cap, timesteps);
 
     // Case 2: Constant voltage charging
@@ -70,9 +70,9 @@ void initializeArrays(Capacitor& cap, int timesteps, double dt) {
 }
 
 // Constant current simulation
-void simulateConstantCurrent(Capacitor& cap, int timesteps, double dt, double I) {
+void simulateConstantCurrent(Capacitor& cap, int timesteps, double dt, double I) { 
 
-    cap.current[0] = I;   // given by assignment
+    cap.current[0] = I;
 
     for (int t = 1; t < timesteps; t++) {
 
