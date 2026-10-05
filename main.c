@@ -1,10 +1,10 @@
-#include <iostream>
-#include <cmath>
-#include <cstdlib>
+#include <iostream> // for cout, endl
+#include <cmath> // for exp()
+#include <cstdlib> // for exit()
 
-using namespace std;
+using namespace std; // for cout, endl
 
-// Capacitor structure (from assignment)
+// Capacitor structure to hold time, voltage, current arrays and capacitance value
 
 struct Capacitor {
     double* time;      // time array
